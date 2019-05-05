@@ -58,4 +58,4 @@ flash :  blink.bin
 	st-flash write blink.bin 0x08000000
 
 clean:
-	rm *.elf *.bin *.o build/*.o
+	rm *.elf *.bin *.o Drivers/build/*.o
