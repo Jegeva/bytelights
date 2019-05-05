@@ -1,0 +1,9 @@
+#ifndef __UART_H
+#define __UART_H
+extern volatile uint8_t message_available ;
+extern volatile uint8_t strip[15];
+
+void uart_init();
+
+
+#endif
