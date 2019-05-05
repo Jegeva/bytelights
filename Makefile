@@ -48,7 +48,10 @@ interrupts.o : ./src/interrupts.c
 blink.o:	blink.c
 	$(CC) $(CFLAGS)  $(C_INCLUDES) -c blink.c
 
-blink.elf: 	startup.o blink.o system_stm32f1xx.o mersenne.o interrupts.o uart.o
+libstm302f103c8.a :
+	make -C Drivers
+
+blink.elf: 	startup.o blink.o system_stm32f1xx.o mersenne.o interrupts.o uart.o libstm302f103c8.a
 	$(LD) -LDrivers/ -LDrivers/CMSIS/Lib/GCC/  -T STM32F103CBTx_FLASH.ld -o blink.elf startup.o blink.o uart.o system_stm32f1xx.o mersene.o interrupts.o -larm_cortexM3l_math -lstm32f103c8
 
 blink.bin: blink.elf
@@ -58,4 +61,4 @@ flash :  blink.bin
 	st-flash write blink.bin 0x08000000
 
 clean:
-	rm *.elf *.bin *.o Drivers/build/*.o
+	rm *.elf *.bin *.o Drivers/build/*.o Drivers/*.a
